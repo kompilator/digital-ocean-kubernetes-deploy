@@ -28,10 +28,13 @@ jobs:
             curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
             chmod u+x ./kubectl
       - run:
+          name: set permissions
+          command:
+            chmod u+x ./scripts/ci-deploy.sh
+      - run:
           name: Deploy Code
-          command: |
-          chmod u+x ./scripts/ci-deploy.sh
-          ./scripts/ci-deploy.sh
+          command:
+            ./scripts/ci-deploy.sh
 workflows:
   version: 2
   build-master:
